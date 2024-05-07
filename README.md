@@ -25,7 +25,7 @@ I plan on maintaining this repository as I continue plugin development, adding a
 
 ![My Discord](https://discord-readme-badge.vercel.app/api?id=1226917994635202590)
 
-[![](https://dcbadge.vercel.app/api/server/JeJTqCFJ?style=flat-square)](https://discord.gg/JeJTqCFJ)
+[![](https://dcbadge.limes.pink/api/server/JeJTqCFJ?style=flat-square)](https://discord.gg/JeJTqCFJ)
 
 # Requirements
 1. [Visual Studio Community 2022](https://visualstudio.microsoft.com/)
@@ -82,6 +82,10 @@ This indicates some form of issue with the compiler VSCode and CMake is register
 > "Cannot find source file ..."
 
 This CMake configuration utilizes a `sourcelist.cmake` and `headerlist.cmake` file to `set()` CMake sources. Make sure you include paths to relative files in those respective CMake files before compiling. Sources (.cpp) belong in sourcelist while Headers (.h) belong in headerlist. I may change this in the future.
+
+> "Bad CMAKE executable "" ..."
+
+You are missing Visual Studio
 
 # Common CommonLibSSE-NG Plugin Templates
 This project wouldn't be possible without these public resources. Will add to the list as I find them.
