@@ -90,7 +90,7 @@ install(
 ########################################################################################################################
 
 message("Options:")
-option(BUILD_TESTS "Build unit tests." ON)
+option(BUILD_TESTS "Build unit tests." OFF)
 message("\tTests: ${BUILD_TESTS}")
 
 if(BUILD_TESTS)

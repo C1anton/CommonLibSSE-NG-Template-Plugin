@@ -73,7 +73,7 @@
             "cacheVariables": {
                 "BUILD_TESTS": {
                     "type": "STRING",
-                    "value": "OFF"
+                    "value": "ON"
                 }
             }
         },
@@ -94,6 +94,10 @@
                 "CMAKE_BUILD_TYPE": {
                     "type": "STRING",
                     "value": "Debug"
+                },
+                "BUILD_TESTS": {
+                    "type": "STRING",
+                    "value": "OFF"
                 }
             }
         },
@@ -110,7 +114,7 @@
             "displayName": "Debug with Catch2 (MSVC)",
             "description": "Debug build for testing using MSVC with catch2 unit tests",
             "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build/debug-msvc",
+            "binaryDir": "${sourceDir}/build/debug-msvc-tests",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": {
                     "type": "STRING",
@@ -127,7 +131,7 @@
                 "x64",
                 "msvc"
             ],
-            "displayName": "Release",
+            "displayName": "Release (MSVC)",
             "description": "Optimized release build using MSVC",
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/release-msvc",
@@ -135,6 +139,10 @@
                 "CMAKE_BUILD_TYPE": {
                     "type": "STRING",
                     "value": "Release"
+                },
+                "BUILD_TESTS": {
+                    "type": "STRING",
+                    "value": "OFF"
                 }
             }
         }
