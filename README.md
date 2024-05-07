@@ -24,6 +24,7 @@ I set out to create this template for two reasons: One, to offer another updated
 I plan on maintaining this repository as I continue plugin development, adding and removing features as I deem necessary. Feel free to join the Modding Guild community where you can find and message me directly.
 
 ![My Discord](https://discord-readme-badge.vercel.app/api?id=1226917994635202590)
+
 [![](https://dcbadge.vercel.app/api/server/JeJTqCFJ?style=flat-square)](https://discord.gg/JeJTqCFJ)
 
 # Requirements
