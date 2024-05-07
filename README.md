@@ -1,5 +1,5 @@
 # Skyrim SKSE CommonLibSSE-NG Plugin Template
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/issues)
 
 A Plugin Template for CommonLibSSE-NG to build for Skyrim versions SE, AE, VR, and GOG. Included libraries:
 
