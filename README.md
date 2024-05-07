@@ -1,7 +1,6 @@
 # Skyrim SKSE CommonLibSSE-NG Plugin Template
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 
----
 A Plugin Template for CommonLibSSE-NG to build for Skyrim versions SE, AE, VR, and GOG. Included libraries:
 
 | Plugin | README |
@@ -28,7 +27,6 @@ I plan on maintaining this repository as I continue plugin development, adding a
 [![](https://dcbadge.vercel.app/api/server/JeJTqCFJ?style=flat-square)](https://discord.gg/JeJTqCFJ)
 
 # Requirements
----
 1. [Visual Studio Community 2022](https://visualstudio.microsoft.com/)
 2. Visual Studio Community 2022 C++ Desktop Development Module
 3. [Vcpkg](https://github.com/microsoft/vcpkg)
@@ -38,7 +36,6 @@ I plan on maintaining this repository as I continue plugin development, adding a
 5. Install [Visual Studio Code](https://visualstudio.microsoft.com/)
 
 # Quickstart
----
 Using [Visual Studio Code](https://visualstudio.microsoft.com/) open the project folder with VSCode.
 > Upon opening the project, Visual Studio Code should prompt you to install C++ and/or C++ Cmake Tools. Click yes to all of these options. This will install the necessary extensions Visual Studio Code needs to register and operate a CMake project.
 
@@ -53,7 +50,6 @@ Once the project finishes loading, it should automatically run a CMake:Configure
 Once the CMake:Configure is complete, all of your build files will be located in `/build`. Including CommonLibSSE-NG.
 
 # Project Settings
----
 By default, the build settings will output the .dll into `/build/SKSE/Plugins/` unless you do one of the following:
 * Setup an environment variable named `SKYRIM_MODS_FOLDER` pointing to your `Mod Organizer 2/mods/` directory where all your other mods are unpacked and installed. Doing this will output the plugin into `Mod Organizer 2/mods/TemplatePlugin/SKSE/Plugins` going forward.
 
@@ -69,8 +65,6 @@ project(
 ```
 
 # Common Issues
----
-
 > "Attempted to extract into (...) but folder already exists"
 
  Delete your "C:/path/to/vcpkg/buildtrees/(...)" folder and re-run CMake:Configure.
@@ -89,7 +83,6 @@ This indicates some form of issue with the compiler VSCode and CMake is register
 This CMake configuration utilizes a `sourcelist.cmake` and `headerlist.cmake` file to `set()` CMake sources. Make sure you include paths to relative files in those respective CMake files before compiling. Sources (.cpp) belong in sourcelist while Headers (.h) belong in headerlist. I may change this in the future.
 
 # Common CommonLibSSE-NG Plugin Templates
----
 This project wouldn't be possible without these public resources. Will add to the list as I find them.
 | Author | Link |
 | ---- | ---- |
@@ -99,7 +92,6 @@ This project wouldn't be possible without these public resources. Will add to th
 | Skyrim Scripting | https://github.com/SkyrimScripting/SKSE_Templates |
 
 # SKSE Development Resources
----
 
 #### [Modding-Silo](https://modding-silo.com/)
 A work-in-progress website dedicated to documenting modding, and authors.
