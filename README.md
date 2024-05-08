@@ -29,11 +29,11 @@ I plan on maintaining this repository as I continue plugin development, adding a
 
 # Requirements
 1. [Visual Studio Community 2022](https://visualstudio.microsoft.com/) or [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/?q=build+tools)
+2. [Ninja](https://github.com/ninja-build/ninja/releases) (if using Visual Studio Build Tools)
 3. [Vcpkg](https://github.com/microsoft/vcpkg)
-4. [Ninja](https://github.com/ninja-build/ninja/releases) (if using Visual Studio Build Tools)
-4.1 Install via Git or Manual Extraction
-4.2 Setup `VCPKG_ROOT` Environment Variable to `"C:/path/to/vcpkg"`
-4.3 Run `C:/path/to/vcpkg/bootstrap-vcpkg.bat`
+    Install via Git or Manual Extraction
+    Setup `VCPKG_ROOT` Environment Variable to `"C:/path/to/vcpkg"`
+    Run `C:/path/to/vcpkg/bootstrap-vcpkg.bat`
 6. Install [Visual Studio Code](https://visualstudio.microsoft.com/)
 
 # Quickstart
