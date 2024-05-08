@@ -33,9 +33,10 @@ I plan on maintaining this repository as I continue plugin development, adding a
 3. [Vcpkg](https://github.com/microsoft/vcpkg)
 4. Setup `VCPKG_ROOT` Environment Variable to `"C:/path/to/vcpkg"`
 5. Run `C:/path/to/vcpkg/bootstrap-vcpkg.bat`
-6. Install [Visual Studio Code](https://visualstudio.microsoft.com/)
 
 # Quickstart
+Want a full guide? Checkout my [Full Installation Guide](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/wiki/Installation-Guide) here.
+
 Using [Visual Studio Code](https://visualstudio.microsoft.com/) open the project folder with VSCode.
 > Upon opening the project, Visual Studio Code should prompt you to install C++ and/or C++ Cmake Tools. Click yes to all of these options. This will install the necessary extensions Visual Studio Code needs to register and operate a CMake project.
 
@@ -64,27 +65,7 @@ project(
 )
 ```
 
-# Common Issues
-> "Attempted to extract into (...) but folder already exists"
-
- Delete your "C:/path/to/vcpkg/buildtrees/(...)" folder and re-run CMake:Configure.
- 
-> Vcpkg Baseline error
-
-First try re-running "C:/path/to/vcpkg/bootstrap-vcpkg.bat" then running `vcpkg integrate install`.
-If the error still occurs, see: https://learn.microsoft.com/en-us/vcpkg/commands/update-baseline
-
-> "Can't compile a simple program"
-
-This indicates some form of issue with the compiler VSCode and CMake is registering to use in the project. First, ensure in the CMake:Build log that MSVC is being used, and the directory is valid. If issues persist, try reinstalling Visual Studio & the C++ Desktop Development module. 
-
-> "Cannot find source file ..."
-
-This CMake configuration utilizes a `sourcelist.cmake` and `headerlist.cmake` file to `set()` CMake sources. Make sure you include paths to relative files in those respective CMake files before compiling. Sources (.cpp) belong in sourcelist while Headers (.h) belong in headerlist. I may change this in the future.
-
-> "Bad CMAKE executable "" ..."
-
-You are missing Visual Studio
+# Be sure to checkout the [Wiki](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/wiki) for this Plugin!
 
 # Common CommonLibSSE-NG Plugin Templates
 This project wouldn't be possible without these public resources. Will add to the list as I find them.
