@@ -28,13 +28,14 @@ I plan on maintaining this repository as I continue plugin development, adding a
 [![](https://dcbadge.limes.pink/api/server/JeJTqCFJ?style=flat-square)](https://discord.gg/JeJTqCFJ)
 
 # Requirements
-1. [Visual Studio Community 2022](https://visualstudio.microsoft.com/)
-2. Visual Studio Community 2022 C++ Desktop Development Module
+1. [Visual Studio Community 2022](https://visualstudio.microsoft.com/) or [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/?q=build+tools)
 3. [Vcpkg](https://github.com/microsoft/vcpkg)
+4. [Ninja](https://github.com/ninja-build/ninja/releases) (if using Visual Studio Build Tools)
+   > Add `"C:/path/to/ninja/"` in environment PATH
 4.1 Install via Git or Manual Extraction
 4.2 Setup `VCPKG_ROOT` Environment Variable to `"C:/path/to/vcpkg"`
 4.3 Run `C:/path/to/vcpkg/bootstrap-vcpkg.bat`
-5. Install [Visual Studio Code](https://visualstudio.microsoft.com/)
+6. Install [Visual Studio Code](https://visualstudio.microsoft.com/)
 
 # Quickstart
 Using [Visual Studio Code](https://visualstudio.microsoft.com/) open the project folder with VSCode.
