@@ -10,8 +10,11 @@ jobs:
     name: test cmake configure
     runs-on: windows-2022
     steps:
+      - name: Set working directory
+        run: cd ${workspacefolder}
+          
       - name: Cmake Configure
         run: cmake --preset build-release-msvc
-
+          
       - name: Cmake Build Release
         run: cmake --build build release-msvc
