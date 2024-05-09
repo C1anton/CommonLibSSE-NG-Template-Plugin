@@ -18,9 +18,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup Vcpkg
-        uses: microsoft/vcpkg-setup@v1
-
       - name: Set working directory
         run: cd $GITHUB_WORKSPACE
         
