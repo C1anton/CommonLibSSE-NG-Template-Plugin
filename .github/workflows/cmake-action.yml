@@ -7,13 +7,19 @@ on:
 
 jobs:
   cmake-configure:
-    name: test cmake configure
+    name: Test CMake Configure
     runs-on: windows-2022
-    env: 
-      working-directory: .
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Set working directory
+        run: cd $GITHUB_WORKSPACE
+
+      - name: Configure CMake
         run: |
-          echo "Current directory: $(pwd)"  # Debug output
           cmake --preset build-release-msvc
+
+      - name: Build project
+        run: |
           cmake --build build release-msvc
