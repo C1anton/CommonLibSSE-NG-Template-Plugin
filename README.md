@@ -1,5 +1,5 @@
 # Skyrim SKSE CommonLibSSE-NG Plugin Template
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/issues)[![Main CI](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/actions/workflows/cmake-action.yml/badge.svg)](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/actions/workflows/cmake-action.yml)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/issues) [![Main CI](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/actions/workflows/cmake-action.yml/badge.svg)](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/actions/workflows/cmake-action.yml)
 
 A Plugin Template for CommonLibSSE-NG to build for Skyrim versions SE, AE, VR, and GOG. Included libraries:
 
