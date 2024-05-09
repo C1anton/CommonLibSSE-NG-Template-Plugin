@@ -9,9 +9,11 @@ jobs:
   cmake-configure:
     name: test cmake configure
     runs-on: windows-2022
+    env: 
+      working-directory: .
     steps:
       - name: Set working directory
+        working-directory: ${{env.working-directory}}
         run: | 
-          cd ${workspacefolder}
           cmake --preset build-release-msvc
           cmake --build build release-msvc
