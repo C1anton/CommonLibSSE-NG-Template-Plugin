@@ -10,10 +10,15 @@ jobs:
     name: Test CMake Configure
     runs-on: windows-2022
     steps:
-      - name: install vcpkg
-      # You may pin to the exact commit or the version.
-      # uses: lukka/run-vcpkg@8a5116de2b552d6fc8894e9774aacaf2e5db4823
-        uses: lukka/run-vcpkg@v7.6
+      - name: vcpkg-action
+        # You may pin to the exact commit or the version.
+        # uses: johnwason/vcpkg-action@7c4b562bb35ef5a01d9d728acc90100b107dee4d
+        uses: johnwason/vcpkg-action@v6
+        with:
+          # vcpkg triplet to use
+          triplet: x64-windows
+          # Directory containing vcpkg.json manifest file. Cannot be used with pkgs.
+          manifest-dir: .
         
       - name: Checkout repository
         uses: actions/checkout@v2
