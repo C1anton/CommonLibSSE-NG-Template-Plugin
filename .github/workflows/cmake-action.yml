@@ -1,0 +1,17 @@
+on:
+  push:
+    branches:
+    - main
+  schedule:
+  - cron: "0 2 * * 1-5"
+
+jobs:
+  cmake-configure:
+    name: test cmake configure
+    runs-on: windows-2022
+    steps:
+      - name: Cmake Configure
+        run: cmake --preset build-release-msvc
+
+      - name: Cmake Build Release
+        run: cmake --build build release-msvc
