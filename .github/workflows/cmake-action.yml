@@ -11,6 +11,8 @@ jobs:
     runs-on: windows-2022
     steps:
       - name: vcpkg-action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # You may pin to the exact commit or the version.
         # uses: johnwason/vcpkg-action@7c4b562bb35ef5a01d9d728acc90100b107dee4d
         uses: johnwason/vcpkg-action@v6
@@ -19,6 +21,8 @@ jobs:
           triplet: x64-windows
           # Directory containing vcpkg.json manifest file. Cannot be used with pkgs.
           manifest-dir: .
+          # GitHub token to authenticate API requests. Recommended to use  github.token 
+          token: ${{ secrets.GITHUB_TOKEN }} # optional, default is 
         
       - name: Checkout repository
         uses: actions/checkout@v2
