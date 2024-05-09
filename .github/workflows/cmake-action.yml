@@ -12,22 +12,17 @@ jobs:
     steps:
       - name: Set working directory
         run: cd $GITHUB_WORKSPACE
-        
-      - name: vcpkg-action
+
+      - name: run-vcpkg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # You may pin to the exact commit or the version.
-        # uses: johnwason/vcpkg-action@7c4b562bb35ef5a01d9d728acc90100b107dee4d
-        uses: johnwason/vcpkg-action@v6
+        # uses: lukka/run-vcpkg@8a5116de2b552d6fc8894e9774aacaf2e5db4823
+        uses: lukka/run-vcpkg@v7.6
         with:
-          # vcpkg triplet to use
-          triplet: x64-windows
-          # Extra vcpkg command line args
-          extra-args: --feature-flags=manifests
-          # Directory containing vcpkg.json manifest file. Cannot be used with pkgs.
-          manifest-dir: $GITHUB_WORKSPACE
-          # GitHub token to authenticate API requests. Recommended to use  github.token 
-          token: ${{ secrets.GITHUB_TOKEN }} # optional, default is 
+          # Indicates whether to only setup vcpkg (i.e. installing it and setting the environment variables VCPKG_ROOT, RUNVCPK_VCPKG_ROOT), without installing any port.
+          setupOnly: false
+          vcpkgTriplet: x64-windows
         
       - name: Checkout repository
         uses: actions/checkout@v2
