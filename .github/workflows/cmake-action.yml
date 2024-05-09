@@ -23,7 +23,7 @@ jobs:
           # vcpkg triplet to use
           triplet: x64-windows
           # Directory containing vcpkg.json manifest file. Cannot be used with pkgs.
-          manifest-dir: .
+          manifest-dir: $GITHUB_WORKSPACE
           # GitHub token to authenticate API requests. Recommended to use  github.token 
           token: ${{ secrets.GITHUB_TOKEN }} # optional, default is 
         
