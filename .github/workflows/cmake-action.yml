@@ -17,7 +17,7 @@ jobs:
         uses: lukka/run-cmake@v10.7
         with:
           # Path to CMakeLists.txt.
-          cmakeListsTxtPath: ${{ $GITHUB_WORKSPACE }}/CMakeLists.txt
+          cmakeListsTxtPath: ${{ github.workspace }}/CMakeLists.txt
           # The name of the workflow preset. Optional, it cannot be used with any other preset input. This value is stored in the WORKFLOW_PRESET_NAME environment variable, and used by the default value of 'workflowPresetCmdString' input.
           # The name of the configure preset. Optional, but at least one of the preset input must be provided. This value is stored in the CONFIGURE_PRESET_NAME environment variable, and used by the default value of 'configurePresetCmdString' input.
           configurePreset: build-release-msvc
