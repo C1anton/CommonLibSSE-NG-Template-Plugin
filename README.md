@@ -14,6 +14,7 @@ A Plugin Template for CommonLibSSE-NG to build for Skyrim versions SE, AE, VR, a
 I set out to create this template for two reasons: 
 1. Offer another updated solution for would-be SKSE plugin developers to utilize and learn plugin development. 
 2. Offer a more packaged template with some common tools such as catch2, simpleini, and spdlog.
+
 This work absolutely could not be done without these authors and their original works and derivatives:
 
 * [Monitor144hz](https://github.com/Monitor144hz)
