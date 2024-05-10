@@ -1,13 +1,11 @@
 {
     "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-    "name": "hello-world",
     "version-string": "0.0.1",
     "builtin-baseline": "cbf4a6641528cee6f172328984576f51698de726",
     "dependencies": [
-        "fmt",
+        "simpleini",
         "spdlog",
         "rapidcsv",
-        "simpleini",
-        "directxtk"
+        "catch2"
     ]
 }

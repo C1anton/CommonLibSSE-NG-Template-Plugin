@@ -1,8 +1,7 @@
-cmake_minimum_required(VERSION 3.21)
-
 #
 # -~-~-~-~-~-              Project Setup                -~-~-~-~-~-
 #
+cmake_minimum_required(VERSION 3.21)
 
 project(
     TemplatePlugin 
@@ -10,29 +9,48 @@ project(
     LANGUAGES CXX
 )
 
-set(AUTHOR YourName)
-
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
 
 set(PUBLIC_HEADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME})
-set(BUILD_TEST_SUITE OFF)
+set(BUILD_TESTS OFF)
+set(BUILD_TESTS_PROJECT OFF)
 
 include(GNUInstallDirs)
 
-configure_file(
-  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.rc.in
-  ${CMAKE_CURRENT_BINARY_DIR}/version.rc
-  @ONLY
-)
-
 set(OUTPUT_FOLDER "${CMAKE_SOURCE_DIR}/build")
-
 if(DEFINED ENV{SKYRIM_MODS_FOLDER} AND IS_DIRECTORY "$ENV{SKYRIM_MODS_FOLDER}")
     set(OUTPUT_FOLDER "$ENV{SKYRIM_MODS_FOLDER}/${PROJECT_NAME} ${CMAKE_BUILD_TYPE}")
 endif()
+#set(OUTPUT_FOLDER "C:/Path/To/Custom/Output")
 
+#
+# -~-~-~-~-~-   Automate Git Submodule initialization   -~-~-~-~-~-
+#
+
+find_package(Git QUIET)
+if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+    option(GIT_SUBMODULE "Check submodules during build" ON)
+    if(GIT_SUBMODULE)
+        message(STATUS "Submodule update")
+        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
+                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
+        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+            message(FATAL_ERROR "git submodule update --init --recursive failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
+        endif()
+    endif()
+endif()
+
+if(NOT EXISTS "${PROJECT_SOURCE_DIR}/extern/CommonLibSSE-NG/CMakeLists.txt")
+    message(
+      FATAL_ERROR 
+      "The CommonLibSSE-NG submodule was not found in ${CMAKE_SOURCE_DIR}/extern/CommonLibSSE-NG/ 
+      This may be the result of renaming or moving folders in your project. It also may be the result 
+      of modifying the CMake incorrectly. Please refer to the Repo for defaults."
+    )
+endif()
 
 #
 # -~-~-~-~-~- Include Source & Header files recursively -~-~-~-~-~-
@@ -44,6 +62,7 @@ file(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
   ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
 )
+
 list(REMOVE_ITEM headers ${CMAKE_CURRENT_SOURCE_DIR}/include/PCH.h)
 
 file(
@@ -51,12 +70,10 @@ file(
   sources
   ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc
-  ${CMAKE_CURRENT_BINARY_DIR}/version.rc
 )
 
-message("[Test Suite]: ${BUILD_TEST_SUITE}")
-if(BUILD_TEST_SUITE)
-    message("[Test Suite] Including ${PROJECT_NAME}/tests into Build.")
+message("Project:\n \tBuild Test: ${BUILD_TESTS_PROJECT}")
+if(BUILD_TESTS_PROJECT)
     file(
         GLOB_RECURSE
         tests
@@ -69,35 +86,36 @@ source_group(
   FILES ${headers} ${sources}
 )
 
+#
 # -~-~-~-~-~-   Install CommonLibSSE-NG from Gitmodule  -~-~-~-~-~-
+#   Add additional find_package() calls as needed by vcpkg imports
+# Add additional add_subdirectory() calls as needed by git submodules
 
 add_subdirectory(extern/CommonLibSSE-NG)
 include(extern/CommonLibSSE-NG/cmake/CommonLibSSE.cmake)
 
 add_commonlibsse_plugin(
   ${PROJECT_NAME}
-  AUTHOR AuthorName
-  SOURCES ${headers} ${sources}
+  SOURCES 
+    ${headers} 
+    ${sources}
 )
 
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23) # <--- use C++23 standard
-target_precompile_headers(${PROJECT_NAME} PRIVATE src/PCH.h) # <--- PCH.h is required!
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23)
+target_precompile_headers(${PROJECT_NAME} PRIVATE src/PCH.h)
 
-add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+add_library(
+  ${PROJECT_NAME}::${PROJECT_NAME} 
+  ALIAS 
+    ${PROJECT_NAME}
+)
 
 # Additional Packages
 find_package(spdlog REQUIRED)
 
 #
 # -~-~-~-~-~-       Link Libraries & Directories        -~-~-~-~-~-
-#
-
-# Use for newly added libraries.
-# target_link_libraries(
-#   ${PROJECT_NAME}
-#   PRIVATE
-#       SomeLibrary::SomeLibrary
-# )
+#         Add additional target_include_directories as needed.
 
 target_include_directories(
   ${PROJECT_NAME}
@@ -114,8 +132,9 @@ target_include_directories(
 # -~-~-~-~-~-              Output Control               -~-~-~-~-~-
 #
 
-if(BUILD_TEST_SUITE)
-    message("[Test Suite] Starting Test configure")
+if(BUILD_TESTS_PROJECT)
+    message("Project:")
+    message("\tStarting Test configure")
     find_package(Catch2 CONFIG REQUIRED)
 
     include(CTest)
@@ -123,7 +142,6 @@ if(BUILD_TEST_SUITE)
 
     add_executable(
             ${PROJECT_NAME}Tests
-            ${headers}
             ${tests})
 
     target_link_libraries(
@@ -138,13 +156,21 @@ if(BUILD_TEST_SUITE)
 
     catch_discover_tests(${PROJECT_NAME}Tests)
     add_test(NAME ${PROJECT_NAME}Tests COMMAND ${PROJECT_NAME}Tests)
-    message("[Test Suite] Build Test Unit Complete: ${PROJECT_NAME}/tests/${PROJECT_NAME}Tests")
+    message("\tBuild Test Unit Complete")
 endif()
 
 if(DEFINED OUTPUT_FOLDER)
     set(DLL_FOLDER "${OUTPUT_FOLDER}/SKSE/Plugins")
 
     message(STATUS "SKSE plugin output folder: ${DLL_FOLDER}")
+    
+    if (BUILD_TESTS_PROJECT)
+      message(STATUS "Catch2 Test output folder: ${${PROJECT_NAME}_BINARY_DIR}")
+    endif()
+
+    if (BUILD_TESTS)
+      message(STATUS "CommonLibSSE Test output folder: ${CommonLibSSE_BINARY_DIR}")
+    endif()
 
     add_custom_command(
         TARGET "${PROJECT_NAME}"
