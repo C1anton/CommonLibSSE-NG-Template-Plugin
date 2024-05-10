@@ -31,12 +31,10 @@ I plan on maintaining this repository as I continue plugin development, adding a
 [![](https://dcbadge.limes.pink/api/server/JeJTqCFJ?style=flat-square)](https://discord.gg/JeJTqCFJ)
 
 # Requirements
-1. [Visual Studio Community 2022](https://visualstudio.microsoft.com/) or [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/?q=build+tools)
-2. [Git](https://git-scm.com/downloads)
+1. [Visual Studio Code](https://code.visualstudio.com/) + [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/?q=build+tools) or [Visual Studio Community 2022](https://visualstudio.microsoft.com/)
+2. [Git](https://git-scm.com/downloads) or [Github Desktop](https://desktop.github.com/)
 3. [Ninja](https://github.com/ninja-build/ninja/releases) (if using Visual Studio Build Tools)
 4. [Vcpkg](https://github.com/microsoft/vcpkg)
-5. Setup `VCPKG_ROOT` Environment Variable to `"C:/path/to/vcpkg"`
-6. Run `C:/path/to/vcpkg/bootstrap-vcpkg.bat`
 
 # Quickstart
 Want a full guide? Checkout my [Full Installation Guide](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/wiki/Installation-Guide) here.
