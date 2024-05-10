@@ -78,7 +78,7 @@ This project wouldn't be possible without these public resources. Will add to th
 
 # SKSE Development Resources
 
-#### [Modding-Silo](https://modding-silo.com/)
+### [Modding-Silo](https://modding-silo.com/)
 A work-in-progress website dedicated to documenting modding, and authors.
 
 ### [Address Library Database](https://github.com/meh321/AddressLibraryDatabase)
