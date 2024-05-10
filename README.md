@@ -32,26 +32,24 @@ I plan on maintaining this repository as I continue plugin development, adding a
 
 # Requirements
 1. [Visual Studio Community 2022](https://visualstudio.microsoft.com/) or [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/?q=build+tools)
-2. [Ninja](https://github.com/ninja-build/ninja/releases) (if using Visual Studio Build Tools)
-3. [Vcpkg](https://github.com/microsoft/vcpkg)
-4. Setup `VCPKG_ROOT` Environment Variable to `"C:/path/to/vcpkg"`
-5. Run `C:/path/to/vcpkg/bootstrap-vcpkg.bat`
+2. [Git](https://git-scm.com/downloads)
+3. [Ninja](https://github.com/ninja-build/ninja/releases) (if using Visual Studio Build Tools)
+4. [Vcpkg](https://github.com/microsoft/vcpkg)
+5. Setup `VCPKG_ROOT` Environment Variable to `"C:/path/to/vcpkg"`
+6. Run `C:/path/to/vcpkg/bootstrap-vcpkg.bat`
 
 # Quickstart
 Want a full guide? Checkout my [Full Installation Guide](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/wiki/Installation-Guide) here.
 
-Using [Visual Studio Code](https://visualstudio.microsoft.com/) open the project folder with VSCode.
+1. Using [Visual Studio Code](https://visualstudio.microsoft.com/) open the project folder with VSCode.
 > Upon opening the project, Visual Studio Code should prompt you to install C++ and/or C++ Cmake Tools. Click yes to all of these options. This will install the necessary extensions Visual Studio Code needs to register and operate a CMake project.
-
-This project was designed and tested within Visual Studio Code. I can't guarantee its effectiveness in other editors.
-
-Once the project finishes loading, it should automatically run a CMake:Configure. If not, select one of the CMake configure presets included in this repo and run a configure.
-
+> The CommonLibSSE-NG Git submodule should automatically init and update on CMake configure.
+2. Select a configure preset
 * Debug (MSVC) - Standard CXX debug compile parameters without Catch2 unit tests.
 * Debug with Catch2 (MSVC) - Same as above, but with additional Catch2 unit test libraries.
 * Release (MSVC) - Release version for distribution.
 
-Once the CMake:Configure is complete, all of your build files will be located in `/build`. Including CommonLibSSE-NG.
+Once the CMake configure is complete, all of your build files will be located in `/build`. Including CommonLibSSE-NG.
 
 # Project Settings
 By default, the build settings will output the .dll into `/build/SKSE/Plugins/` unless you do one of the following:
