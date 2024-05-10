@@ -84,4 +84,10 @@ A work-in-progress website dedicated to documenting modding, and authors.
 ### [Address Library Database](https://github.com/meh321/AddressLibraryDatabase)
 Very useful for SKSE plugin development. Might as well be a required resource at this point.
 
+### [meh321's Address Library Database](https://github.com/meh321/AddressLibraryDatabase)
+
+### [meh321's Address Library Manager](https://github.com/meh321/AddressLibraryManager)
+
+### [https://github.com/atom0s/Steamless/](https://github.com/atom0s/Steamless/)
+
 #### More to come...
