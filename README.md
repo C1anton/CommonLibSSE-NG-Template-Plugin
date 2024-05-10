@@ -6,15 +6,15 @@ A Plugin Template for CommonLibSSE-NG to build for Skyrim versions SE, AE, VR, a
 | Plugin | README |
 | ------ | ------ |
 | CommonLibSSE-NG | https://github.com/CharmedBaryon/CommonLibSSE-NG/ |
-| SimpleINI | https://github.com/brofield/simpleini |
-| nlohmann-json | https://github.com/nlohmann/json |
-| Articuno | https://gitlab.com/colorglass/articuno |
-| Catch2 | https://github.com/catchorg/Catch2 |
-| Gluino | https://gitlab.com/colorglass/gluino |
-| SKSE | https://github.com/ianpatt/skse64 |
-| Papyrus Sources | https://gitlab.com/colorglass/vcpkg-colorglass | 
+| [SimpleINI](https://github.com/brofield/simpleini) | Read/Write ini configurations. |
+| [spdlog](https://github.com/gabime/spdlog) | Used for logging to log file. |
+| [RapidCSV](https://github.com/d99kris/rapidcsv) | Used by CommonLibSSE for unit tests  |
+| [Catch2](https://github.com/catchorg/Catch2) | A unit testing framework for C++ |
 
-I set out to create this template for two reasons: One, to offer another updated solution for would-be SKSE plugin developers to utilize and learn plugin development. Two, offer a more packaged template with some common tools such as catch2, simpleini, and papyrus deployement. This work absolutely could not be done without these authors and their original works and derivatives:
+I set out to create this template for two reasons: 
+1. Offer another updated solution for would-be SKSE plugin developers to utilize and learn plugin development. 
+2. Offer a more packaged template with some common tools such as catch2, simpleini, and spdlog.
+This work absolutely could not be done without these authors and their original works and derivatives:
 
 * [Monitor144hz](https://github.com/Monitor144hz)
 * [Skyrim Scripting](https://github.com/SkyrimScripting)
