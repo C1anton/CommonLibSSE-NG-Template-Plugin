@@ -41,21 +41,20 @@ I plan on maintaining this repository as I continue plugin development, adding a
 # Quickstart
 Want a full guide? Checkout my [Full Installation Guide](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/wiki/Installation-Guide) here.
 
-1. Using [Visual Studio Code](https://visualstudio.microsoft.com/) open the project folder with VSCode.
-> Upon opening the project, Visual Studio Code should prompt you to install C++ and/or C++ Cmake Tools. Click yes to all of these options. This will install the necessary extensions Visual Studio Code needs to register and operate a CMake project.
-> The CommonLibSSE-NG Git submodule should automatically init and update on CMake configure.
-2. Select a configure preset
+1. Setup `VCPKG_ROOT` system envrionment variable to point towards `"C:/path/to/vcpkg"`
+2. (optional) Setup `SKYRIM_MODS_FOLDER` system environment variable to point twards `"C:/path/to/Mod Organizer 2/mods/folder`"
+   > Not doing this will result in the DLL exporting to `"${CMAKE_SOURCE_DIR}/build"` instead.
+3. (optional) If using Visual Studio Code, Add `"C:/path/to/ninja/ninja.exe"` to your envrionment PATH.
+4. Using [Visual Studio Code](https://visualstudio.microsoft.com/) open the project folder with VSCode.
+5. If prompted, install both C/C++ & CMake tools provided by Visual Studio Code.
+6. Select a configure preset
 * Debug (MSVC) - Standard CXX debug compile parameters without Catch2 unit tests.
 * Debug with Catch2 (MSVC) - Same as above, but with additional Catch2 unit test libraries.
 * Release (MSVC) - Release version for distribution.
-
-Once the CMake configure is complete, all of your build files will be located in `/build`. Including CommonLibSSE-NG.
+7. Click `Build` and allow it time to compile.
 
 # Project Settings
-By default, the build settings will output the .dll into `/build/SKSE/Plugins/` unless you do one of the following:
-* Setup an environment variable named `SKYRIM_MODS_FOLDER` pointing to your `Mod Organizer 2/mods/` directory where all your other mods are unpacked and installed. Doing this will output the plugin into `Mod Organizer 2/mods/TemplatePlugin/SKSE/Plugins` going forward.
-
-* Open `CMakeLists.txt` and under "Advanced CMake Configuration & Libraries" locate the `set(OUTPUT_FOLDER ...` options. Here you can modify the output format of `SKYRIM_MODS_FOLDER`, set your own `C:/path/to/folder`, or continue using `"${CMAKE_SOURCE_DIR}/build"`
+By default, the build settings will output the .dll into `"/build/SKSE/Plugins/"` unless you setup your `SKYRIM_MODS_FOLDER` as detailed above.
 
 While you're inside the `CMakeLists.txt` file, you can change your plugin name at the top of the file.
 ```
@@ -64,6 +63,19 @@ project(
     VERSION 0.0.1 <- Specify your .dll version
     LANGUAGES CXX <- Do not touch
 )
+```
+Just below that, you can configure optional Build settings.
+```
+set(BUILD_TESTS OFF) <- OFF/ON enables CommonLibSSE-NG specific Catch2 unit tests (default OFF).
+set(BUILD_TESTS_PROJECT OFF) <- OFF/ON enables Project specific Catch2 unit tests (default OFF).
+```
+Further down, you can modify your .dll output directory.
+```
+set(OUTPUT_FOLDER "${CMAKE_SOURCE_DIR}/build") <- Used if `SKYRIM_MODS_FOLDER` is not set.
+if(DEFINED ENV{SKYRIM_MODS_FOLDER} AND IS_DIRECTORY "$ENV{SKYRIM_MODS_FOLDER}")
+    set(OUTPUT_FOLDER "$ENV{SKYRIM_MODS_FOLDER}/${PROJECT_NAME} ${CMAKE_BUILD_TYPE}") 
+endif()
+#set(OUTPUT_FOLDER "C:/Path/To/Custom/Output") <- Uncomment and use for custom path.
 ```
 
 # Be sure to checkout the [Wiki](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/wiki) for this Plugin!
