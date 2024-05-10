@@ -26,7 +26,7 @@ This work absolutely could not be done without these authors and their original 
 
 I plan on maintaining this repository as I continue plugin development, adding and removing features as I deem necessary. Feel free to join the Modding Guild community where you can find and message me directly.
 
-<img src="https://discord-readme-badge.vercel.app/api?id=1226917994635202590" width=50% height=50%>
+<img src="https://discord-readme-badge.vercel.app/api?id=1226917994635202590" width=25% height=35%>
 
 [![](https://dcbadge.limes.pink/api/server/JeJTqCFJ?style=flat-square)](https://discord.gg/JeJTqCFJ)
 
