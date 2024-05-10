@@ -1,99 +1,121 @@
-########################################################################################################################
-## Main CMake Project Setup
-########################################################################################################################
-
-# It's recommended to set a minimum CMake version.
-# If you use CMake features from higher versions, update this to match.
 cmake_minimum_required(VERSION 3.21)
 
-# Set your project name by replacing TemplatePlugin. This will be the name of your SKSE .dll file.
-# Note: Does not support spaces or periods. Keep it simple but identifiable and unique.
+#
+# -~-~-~-~-~-              Project Setup                -~-~-~-~-~-
+#
+
 project(
     TemplatePlugin 
     VERSION 0.0.1 
     LANGUAGES CXX
 )
 
-########################################################################################################################
-## Advanced CMake Configuration & Libraries (Intermediate users only)
-## author: colorglass, Monitor144hz, Skyrim Scripting
-########################################################################################################################
+set(AUTHOR YourName)
 
-# Define compiler version.
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
 
-# Used by some included libraries.
+set(PUBLIC_HEADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME})
+set(BUILD_TEST_SUITE OFF)
+
 include(GNUInstallDirs)
 
-# Set default .dll output to "/build/SKSE/Plugins"
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.rc.in
+  ${CMAKE_CURRENT_BINARY_DIR}/version.rc
+  @ONLY
+)
+
 set(OUTPUT_FOLDER "${CMAKE_SOURCE_DIR}/build")
 
-# Using "SKYRIM_MODS_FOLDER" ENV variable since it's common across multiple templates.
-# The folder structure will be created if it doesn't exist, so you don't need to create an empty mod.
-# This setting will output the .dll and .pdb file into:
-
-# {SKYRIM_MODS_FOLDER}/{PROJECT NAME} DEBUG or RELEASE/SKSE/Plugins/TemplatePlugin.dll
-# {SKYRIM_MODS_FOLDER}/{PROJECT NAME} DEBUG or RELEASE/SKSE/Plugins/TemplatePlugin.pdb
 if(DEFINED ENV{SKYRIM_MODS_FOLDER} AND IS_DIRECTORY "$ENV{SKYRIM_MODS_FOLDER}")
     set(OUTPUT_FOLDER "$ENV{SKYRIM_MODS_FOLDER}/${PROJECT_NAME} ${CMAKE_BUILD_TYPE}")
 endif()
 
-# Otherwise, you can set OUTPUT_FOLDER to any place you'd like by uncommenting this line.
-# set(OUTPUT_FOLDER "C:/path/to/any/folder")
 
-# Find and build dependencies of/for CommonLibSSE
-find_package(CommonLibSSE CONFIG REQUIRED)
-find_path(ARTICUNO_INCLUDE_DIRS "articuno/articuno.h")
-find_package(ryml CONFIG REQUIRED)
+#
+# -~-~-~-~-~- Include Source & Header files recursively -~-~-~-~-~-
+#
 
-# Add any .cpp, .h, or .cpp test files to the appropriate .cmake files below.
-include(cmake/headerlist.cmake)
-include(cmake/sourcelist.cmake)
-include(cmake/tests.cmake)
+file(
+  GLOB_RECURSE
+  headers
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
+)
+list(REMOVE_ITEM headers ${CMAKE_CURRENT_SOURCE_DIR}/include/PCH.h)
 
-# CommonLibeSSE-NG feature required for ng deployment
-add_commonlibsse_plugin(${PROJECT_NAME} SOURCES ${headers} ${sources}) #    <--- specifies plugin.cpp
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23) #               <--- use C++23 standard
-
-# Setup linked libraries for library dependencies specified in vcpkg-configuration.
-target_include_directories(
-    "${PROJECT_NAME}"
-    PRIVATE
-        ${SIMPLEINI_INCLUDE_DIRS}
-        ${ARTICUNO_INCLUDE_DIRS}
+file(
+  GLOB_RECURSE
+  sources
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc
+  ${CMAKE_CURRENT_BINARY_DIR}/version.rc
 )
 
-target_link_libraries(
-    ${PROJECT_NAME}
-    PRIVATE
-        ryml::ryml
+message("[Test Suite]: ${BUILD_TEST_SUITE}")
+if(BUILD_TEST_SUITE)
+    message("[Test Suite] Including ${PROJECT_NAME}/tests into Build.")
+    file(
+        GLOB_RECURSE
+        tests
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp
+    )
+endif()
+
+source_group(
+  TREE ${CMAKE_CURRENT_SOURCE_DIR}
+  FILES ${headers} ${sources}
 )
 
-# Do not touch this line.
+# -~-~-~-~-~-   Install CommonLibSSE-NG from Gitmodule  -~-~-~-~-~-
+
+add_subdirectory(extern/CommonLibSSE-NG)
+include(extern/CommonLibSSE-NG/cmake/CommonLibSSE.cmake)
+
+add_commonlibsse_plugin(
+  ${PROJECT_NAME}
+  AUTHOR AuthorName
+  SOURCES ${headers} ${sources}
+)
+
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23) # <--- use C++23 standard
 target_precompile_headers(${PROJECT_NAME} PRIVATE src/PCH.h) # <--- PCH.h is required!
 
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
-install(
-    TARGETS 
-    ${PROJECT_NAME}
-    DESTINATION 
-    "${CMAKE_INSTALL_LIBDIR}"
+# Additional Packages
+find_package(spdlog REQUIRED)
+
+#
+# -~-~-~-~-~-       Link Libraries & Directories        -~-~-~-~-~-
+#
+
+# Use for newly added libraries.
+# target_link_libraries(
+#   ${PROJECT_NAME}
+#   PRIVATE
+#       SomeLibrary::SomeLibrary
+# )
+
+target_include_directories(
+  ${PROJECT_NAME}
+  PRIVATE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/src>
+    $<INSTALL_INTERFACE:src>
+    ${SIMPLEINI_INCLUDE_DIRS}
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 
-########################################################################################################################
-## Catch2 conditonal unit test Cmake configuration (Advanced users only)
-## author: colorglass
-## src: https://gitlab.com/colorglass/commonlibsse-sample-plugin
-## catch2: https://github.com/catchorg/Catch2
-########################################################################################################################
+#
+# -~-~-~-~-~-              Output Control               -~-~-~-~-~-
+#
 
-message("Options:")
-option(BUILD_TESTS "Build unit tests." OFF)
-message("\tTests: ${BUILD_TESTS}")
-
-if(BUILD_TESTS)
+if(BUILD_TEST_SUITE)
+    message("[Test Suite] Starting Test configure")
     find_package(Catch2 CONFIG REQUIRED)
 
     include(CTest)
@@ -116,23 +138,10 @@ if(BUILD_TESTS)
 
     catch_discover_tests(${PROJECT_NAME}Tests)
     add_test(NAME ${PROJECT_NAME}Tests COMMAND ${PROJECT_NAME}Tests)
-    message("Build Test Unit Complete: ${PROJECT_NAME}Tests")
+    message("[Test Suite] Build Test Unit Complete: ${PROJECT_NAME}/tests/${PROJECT_NAME}Tests")
 endif()
 
-########################################################################################################################
-## CMake Output Configuration (Advanced Users Only)
-## author: Monitor144hz
-## src: https://github.com/Monitor144hz/CommonLibSSE-NG-Template-Plugin
-########################################################################################################################
-
-
-# When your SKSE .dll is compiled, this will automatically copy the .dll into your mods folder.
-# Only works if you configure OUTPUT_FOLDER above (or set the SKYRIM_MODS_FOLDER environment variable)
 if(DEFINED OUTPUT_FOLDER)
-    # If you specify an <OUTPUT_FOLDER> (including via environment variables)
-    # then we'll copy your mod files into Skyrim or a mod manager for you!
-
-    # Copy the SKSE plugin .dll files into the SKSE/Plugins/ folder
     set(DLL_FOLDER "${OUTPUT_FOLDER}/SKSE/Plugins")
 
     message(STATUS "SKSE plugin output folder: ${DLL_FOLDER}")
@@ -155,3 +164,4 @@ if(DEFINED OUTPUT_FOLDER)
         )
     endif()
 endif()
+
