@@ -78,16 +78,7 @@ endif()
 #set(OUTPUT_FOLDER "C:/Path/To/Custom/Output") <- Uncomment and use for custom path.
 ```
 
-# Be sure to checkout the [Wiki](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/wiki) for this Plugin!
-
-# Common CommonLibSSE-NG Plugin Templates
-This project wouldn't be possible without these public resources. Will add to the list as I find them.
-| Author | Link |
-| ---- | ---- |
-| Monitor144hz | https://github.com/Monitor144hz/CommonLibSSE-NG-Template-Plugin |
-| Colorglass (empty) | https://gitlab.com/colorglass/commonlibsse-ng-plugin-template |
-| Colorglass (sample) | https://gitlab.com/colorglass/commonlibsse-sample-plugin |
-| Skyrim Scripting | https://github.com/SkyrimScripting/SKSE_Templates |
+## Be sure to checkout the [Wiki](https://github.com/Patchu1i/CommonLibSSE-NG-Template-Plugin/wiki) for this Plugin!
 
 # SKSE Development Resources
 
