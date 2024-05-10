@@ -17,14 +17,16 @@ I set out to create this template for two reasons:
 
 This work absolutely could not be done without these authors and their original works and derivatives:
 
-* [Monitor144hz](https://github.com/Monitor144hz)
-* [Skyrim Scripting](https://github.com/SkyrimScripting)
-* [Colorglass Studio](https://gitlab.com/colorglass)
+* [Monitor144hz](https://github.com/Monitor144hz) - For their various NG repositories.
+* [Skyrim Scripting](https://github.com/SkyrimScripting) - For their Youtube series, and templates.
+* [Colorglass Studio](https://gitlab.com/colorglass) - For their sample plugin and vcpkg repository.
+* [Parapets](https://github.com/Exit-9B) - For inspiring me to use git submodules instead of vcpkg.
+* [CharmedByron](https://github.com/CharmedBaryon) - For the NG fork of CommonLibSSE, and documentation.
 * Everyone who uploads [open-source SKSE projects](https://github.com/search?q=commonlibsse-ng&type=repositories) on Github
 
 I plan on maintaining this repository as I continue plugin development, adding and removing features as I deem necessary. Feel free to join the Modding Guild community where you can find and message me directly.
 
-![My Discord](https://discord-readme-badge.vercel.app/api?id=1226917994635202590)
+<img src="https://discord-readme-badge.vercel.app/api?id=1226917994635202590" width=50% height=50%>
 
 [![](https://dcbadge.limes.pink/api/server/JeJTqCFJ?style=flat-square)](https://discord.gg/JeJTqCFJ)
 
